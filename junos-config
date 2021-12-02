@@ -1,0 +1,117 @@
+version 18.2R1.9;
+system {
+    login {
+        user juliopdx {
+            uid 2000;
+            class super-user;
+            authentication {
+                encrypted-password "$6$cDoTdDAe$JEfI77aIizSRd0ydZjdoZtkP0QFjFh/Yy9uU9AkRIou5ZUPw8OW0L8sMEZ/HvheYUYPMKYqz4PYrQF06ipxK1."; ## SECRET-DATA
+            }
+        }
+        message "Welcome to the world of tomorrow!";
+    }
+    root-authentication {
+        encrypted-password "$6$xUmeLj6B$NBFrv65e8uXtREMdZ7XVVreM/q1tfCltws9a3RQ6GLm42FlVFI4lqG6rfTEvEh/sWXxy8RdMSr9Au67L82DTm."; ## SECRET-DATA
+    }
+    host-name switch1;
+    time-zone America/Los_Angeles;
+    services {
+        ssh;
+    }
+    syslog {
+        inactive: user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+        console {
+            user none;
+        }
+    }
+    processes {
+        dhcp-service {
+            traceoptions {
+                file dhcp_logfile size 10m;
+                level all;
+                flag packet;
+            }
+        }
+    }
+}
+interfaces {
+    ge-0/0/0 {
+        unit 0 {
+            family inet {
+                address 10.0.12.1/24;
+            }
+        }
+    }
+    ge-0/0/1 {
+        unit 0 {
+            family inet {
+                address 10.0.13.1/24;
+            }
+        }
+    }
+    ge-0/0/2 {
+        unit 0 {
+            family inet {
+                address 10.0.0.1/24;
+            }
+        }
+    }
+    fxp0 {
+        unit 0 {
+            family inet {
+                dhcp {
+                    vendor-id Juniper-vmx-VM619D4E84B3;
+                }
+            }
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 1.1.1.1/32;
+            }
+        }
+    }
+}
+snmp {
+    description somedevice;
+    location "123 fake street";
+    contact "juliopdx@example.com";
+    community juliopdx {
+        authorization read-only;
+    }
+    trap-group test {
+        categories {
+            chassis;
+            link;
+            routing;
+            startup;
+            services;
+        }
+        targets {
+            192.168.10.198;
+        }
+    }
+}
+protocols {
+    ospf {
+        reference-bandwidth 1g;
+        area 0.0.0.0 {
+            interface ge-0/0/2.0 {
+                passive;
+                metric 25;
+            }
+            interface ge-0/0/0.0;
+            interface ge-0/0/1.0;
+        }
+    }
+}

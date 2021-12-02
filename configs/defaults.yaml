@@ -1,0 +1,7 @@
+---
+username: juliopdx
+password: JulioPDX
+connection_options:
+  scrapli:
+    extras:
+      auth_strict_key: False

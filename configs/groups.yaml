@@ -1,0 +1,7 @@
+---
+junos:
+  platform: junos
+  connection_options:
+    scrapli:
+      platform: juniper_junos
+      port: 22

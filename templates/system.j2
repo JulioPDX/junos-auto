@@ -1,0 +1,44 @@
+system {
+    login {
+        user juliopdx {
+            uid 2000;
+            class super-user;
+            authentication {
+                encrypted-password "$6$cDoTdDAe$JEfI77aIizSRd0ydZjdoZtkP0QFjFh/Yy9uU9AkRIou5ZUPw8OW0L8sMEZ/HvheYUYPMKYqz4PYrQF06ipxK1."; ## SECRET-DATA
+            }
+        }
+        message "Welcome to the world of tomorrow!";
+    }
+    root-authentication {
+        encrypted-password "$6$xUmeLj6B$NBFrv65e8uXtREMdZ7XVVreM/q1tfCltws9a3RQ6GLm42FlVFI4lqG6rfTEvEh/sWXxy8RdMSr9Au67L82DTm."; ## SECRET-DATA
+    }
+    host-name switch1;
+    time-zone America/Los_Angeles;
+    services {
+        ssh;
+    }
+    syslog {
+        inactive: user * {
+            any emergency;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+        file interactive-commands {
+            interactive-commands any;
+        }
+        console {
+            user none;
+        }
+    }
+    processes {
+        dhcp-service {
+            traceoptions {
+                file dhcp_logfile size 10m;
+                level all;
+                flag packet;
+            }
+        }
+    }
+}

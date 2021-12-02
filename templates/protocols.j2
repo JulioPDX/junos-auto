@@ -1,0 +1,13 @@
+protocols {
+    ospf {
+        reference-bandwidth 1g;
+        area 0.0.0.0 {
+            interface ge-0/0/2.0 {
+                passive;
+                metric 25;
+            }
+            interface ge-0/0/0.0;
+            interface ge-0/0/1.0;
+        }
+    }
+}

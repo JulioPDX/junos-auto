@@ -1,0 +1,20 @@
+snmp {
+    description somedevice;
+    location "123 fake street";
+    contact "juliopdx@example.com";
+    community juliopdx {
+        authorization read-only;
+    }
+    trap-group test {
+        categories {
+            chassis;
+            link;
+            routing;
+            startup;
+            services;
+        }
+        targets {
+            192.168.10.198;
+        }
+    }
+}
