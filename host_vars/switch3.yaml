@@ -26,7 +26,7 @@ routing_options:
     - route: 0.0.0.0/0
       next_hop: 192.168.10.1
       no_readvertise: True
-  router_id: 1.1.1.1
+  router_id: 3.3.3.3
 
 protocols:
   ospf:
