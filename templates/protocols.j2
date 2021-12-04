@@ -1,13 +1,20 @@
 protocols {
-    ospf {
-        reference-bandwidth 1g;
-        area 0.0.0.0 {
-            interface ge-0/0/2.0 {
+{% for k, v in host.info.protocols.items() %}
+    {{ k }} {
+        reference-bandwidth {{ v["ref_band"] }};
+{% for k, v in v["areas"].items() %}
+        area {{ k }} {
+{% for interface in v["interfaces"] %}
+{% if interface.passive is defined %}
+            interface {{ interface.name }} {
                 passive;
-                metric 25;
             }
-            interface ge-0/0/0.0;
-            interface ge-0/0/1.0;
+{% else %}
+            interface {{ interface.name }};
+{% endif %}
+{% endfor %}
         }
     }
+{% endfor %}
+{% endfor %}
 }

@@ -3,3 +3,13 @@ switch1:
   hostname: 192.168.10.143
   groups:
     - junos
+
+switch2:
+  hostname: 192.168.10.142
+  groups:
+    - junos
+
+switch3:
+  hostname: 192.168.10.197
+  groups:
+    - junos

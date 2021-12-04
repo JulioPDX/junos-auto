@@ -1,0 +1,41 @@
+---
+interfaces:
+  - name: ge-0/0/0
+    unit: 0
+    family: inet
+    address: 10.0.12.2/24
+  - name: ge-0/0/1
+    unit: 0
+    family: inet
+    address: 10.0.23.2/24
+  - name: ge-0/0/2
+    unit: 0
+    family: inet
+    address: 10.0.24.2/24
+  - name: fxp0
+    unit: 0
+    family: inet
+    address: 192.168.10.142/24
+  - name: lo0
+    unit: 0
+    family: inet
+    address: 2.2.2.2/32
+
+routing_options:
+  statics:
+    - route: 0.0.0.0/0
+      next_hop: 192.168.10.1
+      no_readvertise: True
+  router_id: 2.2.2.2
+
+protocols:
+  ospf:
+    ref_band: 1g
+    areas:
+      0.0.0.0:
+        interfaces:
+          - name: lo0
+            passive: True
+          - name: ge-0/0/0.0
+          - name: ge-0/0/1.0
+          - name: ge-0/0/2.0

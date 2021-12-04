@@ -12,7 +12,7 @@ system {
     root-authentication {
         encrypted-password "$6$xUmeLj6B$NBFrv65e8uXtREMdZ7XVVreM/q1tfCltws9a3RQ6GLm42FlVFI4lqG6rfTEvEh/sWXxy8RdMSr9Au67L82DTm."; ## SECRET-DATA
     }
-    host-name switch1;
+    host-name {{ host }};
     time-zone America/Los_Angeles;
     services {
         ssh;

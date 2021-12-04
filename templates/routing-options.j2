@@ -1,0 +1,13 @@
+routing-options {
+    static {
+{% for static in host.info.routing_options.statics %}
+        route {{ static.route }} {
+            next-hop {{ static.next_hop }};
+{% if static.no_readvertise %}
+            no-readvertise;
+{% endif %}
+        }
+    }
+{% endfor %}
+    router-id {{ host.info.routing_options.router_id }};
+}
