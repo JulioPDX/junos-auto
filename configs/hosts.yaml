@@ -1,15 +1,15 @@
 ---
-switch1:
+R1:
   hostname: 192.168.10.143
   groups:
     - junos
 
-switch2:
+R2:
   hostname: 192.168.10.142
   groups:
     - junos
 
-switch3:
+R3:
   hostname: 192.168.10.197
   groups:
     - junos
